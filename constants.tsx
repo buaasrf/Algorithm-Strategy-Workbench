@@ -1,90 +1,76 @@
 
 import React from 'react';
 import { 
-  Play, 
-  Settings, 
-  Database, 
-  Zap, 
-  Code, 
-  Split, 
-  Filter, 
-  ArrowRight, 
-  ChevronRight,
-  Plus,
-  Trash2,
-  Copy,
-  Layout,
-  Cpu,
-  Variable,
-  GitBranch,
-  PlayCircle,
-  StopCircle,
-  Edit2,
-  Search,
-  RefreshCw,
-  Layers
+  Database, Zap, Code, Split, Filter, ArrowRight, Search, RefreshCw, Layers, GitBranch, StopCircle
 } from 'lucide-react';
 import { OperatorType } from './types';
 
-export const OPERATOR_METADATA = {
+export interface OperatorMeta {
+  label: string;
+  icon: React.ReactNode;
+  color: string;
+  description: string;
+}
+
+export const OPERATOR_METADATA: Record<OperatorType, OperatorMeta> = {
   [OperatorType.START]: {
-    label: '用户输入',
+    label: '开始/用户输入',
     icon: <Database className="w-4 h-4" />,
-    color: 'bg-blue-500',
-    description: '数据的起始录入点'
+    color: 'bg-blue-600',
+    description: '策略流程的起点，定义输入参数'
   },
   [OperatorType.INPUT]: {
     label: '数据检索',
     icon: <Search className="w-4 h-4" />,
     color: 'bg-emerald-500',
-    description: '外部知识库检索'
+    description: '从外部知识库或 API 获取实时数据'
   },
   [OperatorType.LLM]: {
-    label: 'LLM',
+    label: '大模型处理',
     icon: <Zap className="w-4 h-4" />,
-    color: 'bg-indigo-500',
-    description: '大语言模型处理'
+    color: 'bg-indigo-600',
+    description: '使用 Gemini 进行文本理解与决策生成'
   },
   [OperatorType.PYTHON]: {
-    label: '代码执行',
+    label: '代码脚本',
     icon: <Code className="w-4 h-4" />,
     color: 'bg-orange-500',
-    description: '自定义 Python 逻辑'
+    description: '执行复杂的自定义 Python 数值计算逻辑'
   },
   [OperatorType.AB_TEST]: {
-    label: 'AB 实验',
+    label: 'AB 流量实验',
     icon: <Split className="w-4 h-4" />,
-    color: 'bg-purple-500',
-    description: '流量切分测试'
+    color: 'bg-purple-600',
+    description: '按比例分配流量，验证不同策略效果'
   },
   [OperatorType.IF_ELSE]: {
     label: '条件分支',
     icon: <GitBranch className="w-4 h-4" />,
-    color: 'bg-cyan-500',
-    description: '基于条件的逻辑分流'
+    color: 'bg-cyan-600',
+    description: '基于布尔表达式进行逻辑分流判断'
   },
   [OperatorType.FILTER]: {
     label: '逻辑过滤',
     icon: <Filter className="w-4 h-4" />,
-    color: 'bg-pink-500',
-    description: '过滤不符合条件的数据'
+    color: 'bg-pink-600',
+    description: '剔除不符合当前策略要求的异常样本'
   },
   [OperatorType.TRANSFORMER]: {
-    label: '模板转换',
+    label: '格式转换',
     icon: <Layers className="w-4 h-4" />,
     color: 'bg-blue-400',
-    description: '数据格式转换'
+    description: '对算子间的数据格式进行映射与对齐'
   },
   [OperatorType.OUTPUT]: {
-    label: '输出响应',
+    label: '结果输出',
     icon: <ArrowRight className="w-4 h-4" />,
     color: 'bg-slate-700',
-    description: '结果返回或存储'
+    description: '策略运行终点，返回决策结果'
   },
   [OperatorType.END]: {
-    label: '结束',
+    label: '流程结束',
     icon: <StopCircle className="w-4 h-4" />,
     color: 'bg-rose-500',
-    description: '流程执行完毕'
+    description: '显式声明策略流程在当前路径终止'
   }
 };

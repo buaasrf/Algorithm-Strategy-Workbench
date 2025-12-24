@@ -1,11 +1,12 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export async function runLLMNode(prompt: string, context: any) {
   try {
+    // 在函数调用时动态获取 API Key 并初始化，避免顶层作用域崩溃
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const systemPrompt = `You are a strategic algorithm assistant. Context from previous nodes: ${JSON.stringify(context)}.`;
+    
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
@@ -14,26 +15,28 @@ export async function runLLMNode(prompt: string, context: any) {
         temperature: 0.7,
       },
     });
-    // Ensure response.text is returned as a string or empty string fallback
+    
     return response.text ?? "";
   } catch (error) {
-    console.error("Gemini Execution Error:", error);
+    console.error("Gemini 节点执行失败:", error);
     throw error;
   }
 }
 
 export async function suggestOptimizations(scenarioJson: string) {
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `Examine this algorithm strategy and suggest 3 optimizations for efficiency or accuracy: ${scenarioJson}`,
+      contents: `分析以下算法策略工作流，并提供3个关于效率或准确性的优化建议: ${scenarioJson}`,
       config: {
         temperature: 0.3,
       },
     });
-    // Ensure response.text is returned as a string or fallback message
-    return response.text ?? "No optimizations suggested.";
+    
+    return response.text ?? "暂时无法生成建议。";
   } catch (error) {
-    return "Could not generate suggestions at this time.";
+    console.error("Gemini 优化建议生成失败:", error);
+    return "AI 建议服务目前不可用。";
   }
 }
