@@ -19,69 +19,72 @@ import {
   GitBranch,
   PlayCircle,
   StopCircle,
-  Edit2
+  Edit2,
+  Search,
+  RefreshCw,
+  Layers
 } from 'lucide-react';
 import { OperatorType } from './types';
 
 export const OPERATOR_METADATA = {
   [OperatorType.START]: {
-    label: 'Start Execution',
-    icon: <PlayCircle className="w-4 h-4" />,
-    color: 'bg-emerald-500',
-    description: 'The starting point of the logic'
-  },
-  [OperatorType.INPUT]: {
-    label: 'Input Source',
+    label: '用户输入',
     icon: <Database className="w-4 h-4" />,
     color: 'bg-blue-500',
-    description: 'Entry point for data'
+    description: '数据的起始录入点'
+  },
+  [OperatorType.INPUT]: {
+    label: '数据检索',
+    icon: <Search className="w-4 h-4" />,
+    color: 'bg-emerald-500',
+    description: '外部知识库检索'
   },
   [OperatorType.LLM]: {
-    label: 'Gemini LLM',
+    label: 'LLM',
     icon: <Zap className="w-4 h-4" />,
     color: 'bg-indigo-500',
-    description: 'Advanced reasoning & text generation'
+    description: '大语言模型处理'
   },
   [OperatorType.PYTHON]: {
-    label: 'Python Script',
+    label: '代码执行',
     icon: <Code className="w-4 h-4" />,
-    color: 'bg-green-600',
-    description: 'Custom logic and processing'
+    color: 'bg-orange-500',
+    description: '自定义 Python 逻辑'
   },
   [OperatorType.AB_TEST]: {
-    label: 'A/B Test',
+    label: 'AB 实验',
     icon: <Split className="w-4 h-4" />,
     color: 'bg-purple-500',
-    description: 'Split traffic between variants'
+    description: '流量切分测试'
   },
   [OperatorType.IF_ELSE]: {
-    label: 'If-Else Condition',
+    label: '条件分支',
     icon: <GitBranch className="w-4 h-4" />,
-    color: 'bg-amber-500',
-    description: 'Branching logic based on expression'
+    color: 'bg-cyan-500',
+    description: '基于条件的逻辑分流'
   },
   [OperatorType.FILTER]: {
-    label: 'Logic Filter',
+    label: '逻辑过滤',
     icon: <Filter className="w-4 h-4" />,
-    color: 'bg-orange-500',
-    description: 'Conditional flow control'
+    color: 'bg-pink-500',
+    description: '过滤不符合条件的数据'
   },
   [OperatorType.TRANSFORMER]: {
-    label: 'Transformer',
-    icon: <Variable className="w-4 h-4" />,
-    color: 'bg-pink-500',
-    description: 'Data structure manipulation'
+    label: '模板转换',
+    icon: <Layers className="w-4 h-4" />,
+    color: 'bg-blue-400',
+    description: '数据格式转换'
   },
   [OperatorType.OUTPUT]: {
-    label: 'Output Sink',
+    label: '输出响应',
     icon: <ArrowRight className="w-4 h-4" />,
-    color: 'bg-gray-700',
-    description: 'Result storage or response'
+    color: 'bg-slate-700',
+    description: '结果返回或存储'
   },
   [OperatorType.END]: {
-    label: 'End Execution',
+    label: '结束',
     icon: <StopCircle className="w-4 h-4" />,
     color: 'bg-rose-500',
-    description: 'Final state of the flow'
+    description: '流程执行完毕'
   }
 };
