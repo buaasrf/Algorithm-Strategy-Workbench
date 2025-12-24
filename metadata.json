@@ -1,0 +1,8 @@
+{
+  "name": "AlgoStrat - Algorithm Strategy Workbench",
+  "description": "A high-performance online strategy workbench for designing algorithm scenarios, managing AB experiments, and defining custom operators, inspired by Dify.ai.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
